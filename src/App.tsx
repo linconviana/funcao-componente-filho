@@ -1,24 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useCallback, useRef } from 'react';
 import './App.css';
+import Modal, { ModalHandles } from './components/Modal';
 
 function App() {
+
+  const modalRef = useRef<ModalHandles>(null)
+
+  /// :: Abrir função do componente modal filho
+  const abrirModal = useCallback(() => {
+
+    modalRef.current?.openModal();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>teste</h1>
+      <Modal ref={modalRef} title={'Modal de teste'} body={'Modal esta aberta'}/>
+
+      <button onClick={abrirModal} >Abrir Modal</button>
     </div>
   );
 }
